@@ -37,6 +37,17 @@ class PostWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
+  location?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
   title?: StringNullableFilter;
 }
 export { PostWhereInput };

@@ -43,6 +43,15 @@ class PostOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  location?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   title?: SortOrder;
 
   @ApiProperty({

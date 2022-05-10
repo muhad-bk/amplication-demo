@@ -5,6 +5,7 @@ export const PostCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="location" source="location" />
         <TextInput label="title" source="title" />
       </SimpleForm>
     </Create>
