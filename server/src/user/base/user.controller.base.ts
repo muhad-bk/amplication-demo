@@ -27,7 +27,9 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { Post } from "../../post/base/Post";
+import { UserAuthenticationStrategyFindManyArgs } from "../../userAuthenticationStrategy/base/UserAuthenticationStrategyFindManyArgs";
+import { UserAuthenticationStrategy } from "../../userAuthenticationStrategy/base/UserAuthenticationStrategy";
+import { UserAuthenticationStrategyWhereUniqueInput } from "../../userAuthenticationStrategy/base/UserAuthenticationStrategyWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -50,10 +52,16 @@ export class UserControllerBase {
       data: data,
       select: {
         createdAt: true,
+        email: true,
+        failedLoginAttempt: true,
+        failedLoginTime: true,
         firstName: true,
         id: true,
+        isActive: true,
+        isLocked: true,
+        isRemoved: true,
         lastName: true,
-        location: true,
+        phone: true,
         roles: true,
         updatedAt: true,
         username: true,
@@ -77,10 +85,16 @@ export class UserControllerBase {
       ...args,
       select: {
         createdAt: true,
+        email: true,
+        failedLoginAttempt: true,
+        failedLoginTime: true,
         firstName: true,
         id: true,
+        isActive: true,
+        isLocked: true,
+        isRemoved: true,
         lastName: true,
-        location: true,
+        phone: true,
         roles: true,
         updatedAt: true,
         username: true,
@@ -105,10 +119,16 @@ export class UserControllerBase {
       where: params,
       select: {
         createdAt: true,
+        email: true,
+        failedLoginAttempt: true,
+        failedLoginTime: true,
         firstName: true,
         id: true,
+        isActive: true,
+        isLocked: true,
+        isRemoved: true,
         lastName: true,
-        location: true,
+        phone: true,
         roles: true,
         updatedAt: true,
         username: true,
@@ -142,10 +162,16 @@ export class UserControllerBase {
         data: data,
         select: {
           createdAt: true,
+          email: true,
+          failedLoginAttempt: true,
+          failedLoginTime: true,
           firstName: true,
           id: true,
+          isActive: true,
+          isLocked: true,
+          isRemoved: true,
           lastName: true,
-          location: true,
+          phone: true,
           roles: true,
           updatedAt: true,
           username: true,
@@ -178,10 +204,16 @@ export class UserControllerBase {
         where: params,
         select: {
           createdAt: true,
+          email: true,
+          failedLoginAttempt: true,
+          failedLoginTime: true,
           firstName: true,
           id: true,
+          isActive: true,
+          isLocked: true,
+          isRemoved: true,
           lastName: true,
-          location: true,
+          phone: true,
           roles: true,
           updatedAt: true,
           username: true,
@@ -195,5 +227,126 @@ export class UserControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "UserAuthenticationStrategy",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/userAuthenticationStrategies")
+  @ApiNestedQuery(UserAuthenticationStrategyFindManyArgs)
+  async findManyUserAuthenticationStrategies(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<UserAuthenticationStrategy[]> {
+    const query = plainToClass(
+      UserAuthenticationStrategyFindManyArgs,
+      request.query
+    );
+    const results = await this.service.findUserAuthenticationStrategies(
+      params.id,
+      {
+        ...query,
+        select: {
+          authenticationStrategy: {
+            select: {
+              id: true,
+            },
+          },
+
+          createdAt: true,
+          expiresWithin: true,
+          externalIdentifier: true,
+          id: true,
+          isActive: true,
+          isRemoved: true,
+          passwordHash: true,
+          passwordResetToken: true,
+          updatedAt: true,
+
+          user: {
+            select: {
+              id: true,
+            },
+          },
+
+          verificationToken: true,
+        },
+      }
+    );
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/userAuthenticationStrategies")
+  async connectUserAuthenticationStrategies(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAuthenticationStrategyWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAuthenticationStrategies: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/userAuthenticationStrategies")
+  async updateUserAuthenticationStrategies(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAuthenticationStrategyWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAuthenticationStrategies: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/userAuthenticationStrategies")
+  async disconnectUserAuthenticationStrategies(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAuthenticationStrategyWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAuthenticationStrategies: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

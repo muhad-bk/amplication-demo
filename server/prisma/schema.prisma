@@ -8,21 +8,48 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  location  String?
-  password  String
-  roles     String[]
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  createdAt                    DateTime                     @default(now())
+  email                        String?                      @unique
+  failedLoginAttempt           Float?
+  failedLoginTime              DateTime?
+  firstName                    String?
+  id                           String                       @id @default(cuid())
+  isActive                     Boolean?
+  isLocked                     Boolean?
+  isRemoved                    Boolean?
+  lastName                     String?
+  password                     String
+  phone                        String                       @unique
+  roles                        String[]
+  updatedAt                    DateTime                     @updatedAt
+  userAuthenticationStrategies UserAuthenticationStrategy[]
+  username                     String                       @unique
 }
 
-model Post {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  location  String?
-  title     String?  @unique
-  updatedAt DateTime @updatedAt
+model AuthenticationStrategy {
+  createdAt                    DateTime                     @default(now())
+  description                  String?
+  id                           String                       @id @default(cuid())
+  isActive                     Boolean?
+  isRemoved                    Boolean?
+  provider                     String                       @unique
+  updatedAt                    DateTime                     @updatedAt
+  userAuthenticationStrategies UserAuthenticationStrategy[]
+}
+
+model UserAuthenticationStrategy {
+  authenticationStrategy   AuthenticationStrategy? @relation(fields: [authenticationStrategyId], references: [id])
+  authenticationStrategyId String?
+  createdAt                DateTime                @default(now())
+  expiresWithin            String?
+  externalIdentifier       String?
+  id                       String                  @id @default(cuid())
+  isActive                 Boolean?
+  isRemoved                Boolean?
+  passwordHash             String?
+  passwordResetToken       String?
+  updatedAt                DateTime                @updatedAt
+  user                     User?                   @relation(fields: [userId], references: [id])
+  userId                   String?
+  verificationToken        String?
 }
