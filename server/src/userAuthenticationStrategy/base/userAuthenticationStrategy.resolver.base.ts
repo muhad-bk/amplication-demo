@@ -19,6 +19,7 @@ import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { Public } from "../../decorators/public.decorator";
 import { CreateUserAuthenticationStrategyArgs } from "./CreateUserAuthenticationStrategyArgs";
 import { UpdateUserAuthenticationStrategyArgs } from "./UpdateUserAuthenticationStrategyArgs";
 import { DeleteUserAuthenticationStrategyArgs } from "./DeleteUserAuthenticationStrategyArgs";
@@ -194,13 +195,8 @@ export class UserAuthenticationStrategyResolverBase {
     return result;
   }
 
-  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @Public()
   @graphql.ResolveField(() => User, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
   async user(
     @graphql.Parent() parent: UserAuthenticationStrategy
   ): Promise<User | null> {
