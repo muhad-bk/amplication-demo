@@ -1,26 +1,8 @@
 [
   {
-    "role": "admin",
+    "role": "fawow",
     "resource": "User",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "User",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "admin",
-    "resource": "User",
-    "action": "create:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "User",
-    "action": "create:any",
+    "action": "update:any",
     "attributes": "*"
   },
   {
@@ -43,6 +25,12 @@
   },
   {
     "role": "user",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -60,6 +48,12 @@
     "attributes": "*"
   },
   {
+    "role": "fawow",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "admin",
     "resource": "AuthenticationStrategy",
     "action": "read:own",
@@ -67,6 +61,12 @@
   },
   {
     "role": "user",
+    "resource": "AuthenticationStrategy",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "AuthenticationStrategy",
     "action": "read:own",
     "attributes": "*"
@@ -79,6 +79,12 @@
   },
   {
     "role": "user",
+    "resource": "AuthenticationStrategy",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "AuthenticationStrategy",
     "action": "create:any",
     "attributes": "*"
@@ -91,6 +97,12 @@
   },
   {
     "role": "user",
+    "resource": "AuthenticationStrategy",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "AuthenticationStrategy",
     "action": "update:any",
     "attributes": "*"
@@ -103,6 +115,12 @@
   },
   {
     "role": "user",
+    "resource": "AuthenticationStrategy",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "AuthenticationStrategy",
     "action": "delete:any",
     "attributes": "*"
@@ -120,6 +138,12 @@
     "attributes": "*"
   },
   {
+    "role": "fawow",
+    "resource": "AuthenticationStrategy",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "admin",
     "resource": "UserAuthenticationStrategy",
     "action": "read:own",
@@ -127,6 +151,12 @@
   },
   {
     "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "UserAuthenticationStrategy",
     "action": "read:own",
     "attributes": "*"
@@ -139,6 +169,12 @@
   },
   {
     "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "UserAuthenticationStrategy",
     "action": "create:any",
     "attributes": "*"
@@ -151,6 +187,12 @@
   },
   {
     "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "UserAuthenticationStrategy",
     "action": "update:any",
     "attributes": "*"
@@ -163,6 +205,12 @@
   },
   {
     "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "UserAuthenticationStrategy",
     "action": "delete:any",
     "attributes": "*"
@@ -175,6 +223,12 @@
   },
   {
     "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "fawow",
     "resource": "UserAuthenticationStrategy",
     "action": "read:any",
     "attributes": "*"
