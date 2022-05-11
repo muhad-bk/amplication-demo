@@ -9,10 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { PostList } from "./post/PostList";
-import { PostCreate } from "./post/PostCreate";
-import { PostEdit } from "./post/PostEdit";
-import { PostShow } from "./post/PostShow";
+import { AuthenticationStrategyList } from "./authenticationStrategy/AuthenticationStrategyList";
+import { AuthenticationStrategyCreate } from "./authenticationStrategy/AuthenticationStrategyCreate";
+import { AuthenticationStrategyEdit } from "./authenticationStrategy/AuthenticationStrategyEdit";
+import { AuthenticationStrategyShow } from "./authenticationStrategy/AuthenticationStrategyShow";
+import { UserAuthenticationStrategyList } from "./userAuthenticationStrategy/UserAuthenticationStrategyList";
+import { UserAuthenticationStrategyCreate } from "./userAuthenticationStrategy/UserAuthenticationStrategyCreate";
+import { UserAuthenticationStrategyEdit } from "./userAuthenticationStrategy/UserAuthenticationStrategyEdit";
+import { UserAuthenticationStrategyShow } from "./userAuthenticationStrategy/UserAuthenticationStrategyShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -47,11 +51,18 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Post"
-          list={PostList}
-          edit={PostEdit}
-          create={PostCreate}
-          show={PostShow}
+          name="AuthenticationStrategy"
+          list={AuthenticationStrategyList}
+          edit={AuthenticationStrategyEdit}
+          create={AuthenticationStrategyCreate}
+          show={AuthenticationStrategyShow}
+        />
+        <Resource
+          name="UserAuthenticationStrategy"
+          list={UserAuthenticationStrategyList}
+          edit={UserAuthenticationStrategyEdit}
+          create={UserAuthenticationStrategyCreate}
+          show={UserAuthenticationStrategyShow}
         />
       </Admin>
     </div>

@@ -12,22 +12,34 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   createdAt: new Date(),
+  email: "exampleEmail",
+  failedLoginAttempt: 42.42,
+  failedLoginTime: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  isActive: "true",
+  isLocked: "true",
+  isRemoved: "true",
   lastName: "exampleLastName",
-  location: "exampleLocation",
   password: "examplePassword",
+  phone: "examplePhone",
   roles: ["exampleRoles"],
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
+  email: "exampleEmail",
+  failedLoginAttempt: 42.42,
+  failedLoginTime: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  isActive: "true",
+  isLocked: "true",
+  isRemoved: "true",
   lastName: "exampleLastName",
-  location: "exampleLocation",
   password: "examplePassword",
+  phone: "examplePhone",
   roles: ["exampleRoles"],
   updatedAt: new Date(),
   username: "exampleUsername",
@@ -35,11 +47,17 @@ const CREATE_RESULT = {
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
+    email: "exampleEmail",
+    failedLoginAttempt: 42.42,
+    failedLoginTime: new Date(),
     firstName: "exampleFirstName",
     id: "exampleId",
+    isActive: "true",
+    isLocked: "true",
+    isRemoved: "true",
     lastName: "exampleLastName",
-    location: "exampleLocation",
     password: "examplePassword",
+    phone: "examplePhone",
     roles: ["exampleRoles"],
     updatedAt: new Date(),
     username: "exampleUsername",
@@ -47,11 +65,17 @@ const FIND_MANY_RESULT = [
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
+  email: "exampleEmail",
+  failedLoginAttempt: 42.42,
+  failedLoginTime: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  isActive: "true",
+  isLocked: "true",
+  isRemoved: "true",
   lastName: "exampleLastName",
-  location: "exampleLocation",
   password: "examplePassword",
+  phone: "examplePhone",
   roles: ["exampleRoles"],
   updatedAt: new Date(),
   username: "exampleUsername",
@@ -121,6 +145,7 @@ describe("User", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        failedLoginTime: CREATE_RESULT.failedLoginTime.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -133,6 +158,7 @@ describe("User", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          failedLoginTime: FIND_MANY_RESULT[0].failedLoginTime.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -156,6 +182,7 @@ describe("User", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        failedLoginTime: FIND_ONE_RESULT.failedLoginTime.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });

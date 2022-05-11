@@ -11,7 +11,16 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import {
+  IsString,
+  IsOptional,
+  IsNumber,
+  IsDate,
+  IsBoolean,
+  ValidateNested,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { UserAuthenticationStrategyUpdateManyWithoutUsersInput } from "./UserAuthenticationStrategyUpdateManyWithoutUsersInput";
 @InputType()
 class UserUpdateInput {
   @ApiProperty({
@@ -23,7 +32,73 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
+  email?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  failedLoginAttempt?: number | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  failedLoginTime?: Date | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
   firstName?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isActive?: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isLocked?: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isRemoved?: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -45,7 +120,7 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  location?: string | null;
+  password?: string;
 
   @ApiProperty({
     required: false,
@@ -56,7 +131,7 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  password?: string;
+  phone?: string;
 
   @ApiProperty({
     required: false,
@@ -70,6 +145,18 @@ class UserUpdateInput {
     nullable: true,
   })
   roles?: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserAuthenticationStrategyUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => UserAuthenticationStrategyUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => UserAuthenticationStrategyUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  userAuthenticationStrategies?: UserAuthenticationStrategyUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

@@ -34,6 +34,33 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  email?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  failedLoginAttempt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  failedLoginTime?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   firstName?: SortOrder;
 
   @ApiProperty({
@@ -52,6 +79,33 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  isActive?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  isLocked?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  isRemoved?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   lastName?: SortOrder;
 
   @ApiProperty({
@@ -61,7 +115,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  location?: SortOrder;
+  password?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -70,7 +124,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  password?: SortOrder;
+  phone?: SortOrder;
 
   @ApiProperty({
     required: false,

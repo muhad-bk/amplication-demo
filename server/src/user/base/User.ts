@@ -11,8 +11,16 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional } from "class-validator";
+import {
+  IsDate,
+  IsString,
+  IsOptional,
+  IsNumber,
+  IsBoolean,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { UserAuthenticationStrategy } from "../../userAuthenticationStrategy/base/UserAuthenticationStrategy";
 @ObjectType()
 class User {
   @ApiProperty({
@@ -22,6 +30,39 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  email!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  failedLoginAttempt!: number | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  failedLoginTime!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -44,14 +85,36 @@ class User {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Boolean,
   })
-  @IsString()
+  @IsBoolean()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  lastName!: string | null;
+  isActive!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isLocked!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isRemoved!: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -62,7 +125,15 @@ class User {
   @Field(() => String, {
     nullable: true,
   })
-  location!: string | null;
+  lastName!: string | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  phone!: string;
 
   @ApiProperty({
     required: true,
@@ -81,6 +152,15 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [UserAuthenticationStrategy],
+  })
+  @ValidateNested()
+  @Type(() => UserAuthenticationStrategy)
+  @IsOptional()
+  userAuthenticationStrategies?: Array<UserAuthenticationStrategy>;
 
   @ApiProperty({
     required: true,

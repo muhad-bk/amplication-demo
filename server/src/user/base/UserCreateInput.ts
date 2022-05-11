@@ -11,9 +11,51 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import {
+  IsString,
+  IsOptional,
+  IsNumber,
+  IsDate,
+  IsBoolean,
+  ValidateNested,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { UserAuthenticationStrategyCreateNestedManyWithoutUsersInput } from "./UserAuthenticationStrategyCreateNestedManyWithoutUsersInput";
 @InputType()
 class UserCreateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  email?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  failedLoginAttempt?: number | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  failedLoginTime?: Date | null;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -27,14 +69,36 @@ class UserCreateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Boolean,
   })
-  @IsString()
+  @IsBoolean()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  lastName?: string | null;
+  isActive?: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isLocked?: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isRemoved?: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -45,7 +109,7 @@ class UserCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  location?: string | null;
+  lastName?: string | null;
 
   @ApiProperty({
     required: true,
@@ -57,6 +121,14 @@ class UserCreateInput {
 
   @ApiProperty({
     required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  phone!: string;
+
+  @ApiProperty({
+    required: true,
     type: [String],
   })
   @IsString({
@@ -64,6 +136,18 @@ class UserCreateInput {
   })
   @Field(() => [String])
   roles!: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserAuthenticationStrategyCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => UserAuthenticationStrategyCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => UserAuthenticationStrategyCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  userAuthenticationStrategies?: UserAuthenticationStrategyCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

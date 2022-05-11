@@ -61,43 +61,121 @@
   },
   {
     "role": "admin",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
     "action": "create:any",
-    "attributes": "*,!id,!createdAt,!updatedAt"
+    "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "AuthenticationStrategy",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Post",
+    "resource": "AuthenticationStrategy",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "AuthenticationStrategy",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "AuthenticationStrategy",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "UserAuthenticationStrategy",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "UserAuthenticationStrategy",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "UserAuthenticationStrategy",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "UserAuthenticationStrategy",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "UserAuthenticationStrategy",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "UserAuthenticationStrategy",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "UserAuthenticationStrategy",
     "action": "read:any",
     "attributes": "*"
   }
