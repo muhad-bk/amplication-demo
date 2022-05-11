@@ -17,6 +17,10 @@ import { UserAuthenticationStrategyList } from "./userAuthenticationStrategy/Use
 import { UserAuthenticationStrategyCreate } from "./userAuthenticationStrategy/UserAuthenticationStrategyCreate";
 import { UserAuthenticationStrategyEdit } from "./userAuthenticationStrategy/UserAuthenticationStrategyEdit";
 import { UserAuthenticationStrategyShow } from "./userAuthenticationStrategy/UserAuthenticationStrategyShow";
+import { BusinessList } from "./business/BusinessList";
+import { BusinessCreate } from "./business/BusinessCreate";
+import { BusinessEdit } from "./business/BusinessEdit";
+import { BusinessShow } from "./business/BusinessShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -63,6 +67,13 @@ const App = (): React.ReactElement => {
           edit={UserAuthenticationStrategyEdit}
           create={UserAuthenticationStrategyCreate}
           show={UserAuthenticationStrategyShow}
+        />
+        <Resource
+          name="Business"
+          list={BusinessList}
+          edit={BusinessEdit}
+          create={BusinessCreate}
+          show={BusinessShow}
         />
       </Admin>
     </div>

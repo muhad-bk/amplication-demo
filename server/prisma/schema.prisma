@@ -53,3 +53,9 @@ model UserAuthenticationStrategy {
   userId                   String?
   verificationToken        String?
 }
+
+model Business {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
