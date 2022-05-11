@@ -4,6 +4,7 @@ import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
 import { AuthenticationStrategyModule } from "./authenticationStrategy/authenticationStrategy.module";
 import { UserAuthenticationStrategyModule } from "./userAuthenticationStrategy/userAuthenticationStrategy.module";
+import { BusinessModule } from "./business/business.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -19,6 +20,7 @@ import { GraphQLModule } from "@nestjs/graphql";
     UserModule,
     AuthenticationStrategyModule,
     UserAuthenticationStrategyModule,
+    BusinessModule,
     ACLModule,
     AuthModule,
     HealthModule,
