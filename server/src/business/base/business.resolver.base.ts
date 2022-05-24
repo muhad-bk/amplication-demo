@@ -18,6 +18,9 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { CreateBusinessArgs } from "./CreateBusinessArgs";
+import { UpdateBusinessArgs } from "./UpdateBusinessArgs";
 import { DeleteBusinessArgs } from "./DeleteBusinessArgs";
 import { BusinessFindManyArgs } from "./BusinessFindManyArgs";
 import { BusinessFindUniqueArgs } from "./BusinessFindUniqueArgs";
@@ -79,6 +82,47 @@ export class BusinessResolverBase {
       return null;
     }
     return result;
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Business)
+  @nestAccessControl.UseRoles({
+    resource: "Business",
+    action: "create",
+    possession: "any",
+  })
+  async createBusiness(
+    @graphql.Args() args: CreateBusinessArgs
+  ): Promise<Business> {
+    return await this.service.create({
+      ...args,
+      data: args.data,
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Business)
+  @nestAccessControl.UseRoles({
+    resource: "Business",
+    action: "update",
+    possession: "any",
+  })
+  async updateBusiness(
+    @graphql.Args() args: UpdateBusinessArgs
+  ): Promise<Business | null> {
+    try {
+      return await this.service.update({
+        ...args,
+        data: args.data,
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new apollo.ApolloError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
   }
 
   @graphql.Mutation(() => Business)

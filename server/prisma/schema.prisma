@@ -57,5 +57,6 @@ model UserAuthenticationStrategy {
 model Business {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
+  name      Int      @unique
   updatedAt DateTime @updatedAt
 }
