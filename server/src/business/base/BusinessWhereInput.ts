@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional } from "class-validator";
+import { IntFilter } from "../../util/IntFilter";
 @InputType()
 class BusinessWhereInput {
   @ApiProperty({
@@ -26,5 +27,16 @@ class BusinessWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntFilter,
+  })
+  @Type(() => IntFilter)
+  @IsOptional()
+  @Field(() => IntFilter, {
+    nullable: true,
+  })
+  name?: IntFilter;
 }
 export { BusinessWhereInput };

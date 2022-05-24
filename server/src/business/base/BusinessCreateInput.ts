@@ -9,5 +9,17 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-class BusinessCreateInput {}
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsInt } from "class-validator";
+@InputType()
+class BusinessCreateInput {
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  name!: number;
+}
 export { BusinessCreateInput };

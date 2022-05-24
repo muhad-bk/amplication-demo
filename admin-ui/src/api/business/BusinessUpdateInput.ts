@@ -1,1 +1,3 @@
-export type BusinessUpdateInput = {};
+export type BusinessUpdateInput = {
+  name?: number;
+};

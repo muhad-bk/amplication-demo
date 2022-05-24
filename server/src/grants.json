@@ -234,22 +234,10 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
-    "resource": "Business",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Business",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
     "role": "fawow",
     "resource": "Business",
     "action": "read:own",
-    "attributes": "*"
+    "attributes": "*,!name"
   },
   {
     "role": "admin",
